@@ -47,7 +47,7 @@ This enterprise lab project simulates a production-grade, multi-tier network env
 # 🏗️ Phase 1: Foundation Infrastructure
 ---
 
-## 📥 Step 1 | Download Windows ISO Files
+## 📥 1.1 | Download Windows ISO Files
 
 Downloaded:
 ✅ Windows Server 2022 Evaluation ISO
@@ -62,7 +62,7 @@ Microsoft Evaluation Center
 
 ---
 
-## 🖥️ Step 2 | Create Windows Server 2022 Virtual Machine
+## 🖥️ 1.2 | Create Windows Server 2022 Virtual Machine
 
 Created a new virtual machine in Oracle VirtualBox.
 
@@ -83,7 +83,7 @@ WindowsServer
 
 ---
 
-## ⚙️ Step 3 | Configure Hardware Resources
+## ⚙️ 1.3 | Configure Hardware Resources
 
 Allocated system resources for the virtual machine.
 
@@ -113,7 +113,7 @@ This step ensured the virtual machine had enough resources to run enterprise ser
 
 ---
 
-## 🪟 Step 4 | Install Windows Server 2022
+## 🪟 1.4 | Install Windows Server 2022
 
 Installed:
 Windows Server 2022 Standard Evaluation Desktop Experience
@@ -129,7 +129,7 @@ The installation process included:
 
 ---
 
-## 🖧 Step 5 | Configure Server Manager
+## 🖧 1.5 | Configure Server Manager
 
 After installation, opened Server Manager to begin configuring enterprise services.
 
@@ -151,7 +151,7 @@ This enabled remote administration, reducing the need for direct console access 
 
 ---
 
-## 🔐 Step 6 | Install Active Directory Domain Services & DNS
+## 🔐 1.6 | Install Active Directory Domain Services & DNS
 
 Installed:
 ✅ Active Directory Domain Services (AD DS)
@@ -171,7 +171,7 @@ This prepares the server to become a Domain Controller.
 
 ---
 
-## 🌐 Step 7 | Configure Domain Controller
+## 🌐 1.7 | Configure Domain Controller
 
 Configured:
 ✅ New Forest
@@ -195,7 +195,7 @@ Domain Promotion:** Promoted the server to a Domain Controller to serve as the "
 
 ---
 
-## 🌐 Step 8 | Configure DHCP Services
+## 🌐 1.8 | Configure DHCP Services
 **Objective:** Implement dynamic IP address management to streamline endpoint onboarding and network stability.
 
 **Action Taken:** Installed the DHCP Server role and configured a partitioned subnet scope (192.168.56.50 – 192.168.56.200).
@@ -220,7 +220,7 @@ Domain Promotion:** Promoted the server to a Domain Controller to serve as the "
 </p>
 ---
 
-## 🔑 Step 9 | Configure DSRM Password
+## 🔑 1.9 | Configure DSRM Password
 
 Configured the:
 Directory Services Restore Mode (DSRM) password
@@ -243,7 +243,7 @@ Context: Building upon the foundation established in Phase 1, this phase focuses
 
 ---
 
-## 📥 Step 1 | Directory Organisation (OUs)
+## 📥 2.1 | Directory Organisation (OUs)
 * **Objective:** Establish the directory structure before onboarding assets.
 * **Action Taken:** Created dedicated Organisational Units (OUs) to move away from default containers and establish a scalable hierarchy (e.g., "Accounts," "Groups," "Workstations").
 
@@ -251,7 +251,7 @@ Context: Building upon the foundation established in Phase 1, this phase focuses
   <img src="https://i.imgur.com/p2LqeBn.png" alt="Lab Step">
 </p>
 
-## 📥 Step 2 | Workstation Provisioning
+## 📥 2.2 | Workstation Provisioning
 * **Objective:** Deploy a client environment capable of enterprise management.
 * **Action Taken:** Performed a clean installation of Windows 11 Pro in VirtualBox. 
 * **Rationale:** I selected the Pro edition over Home to ensure support for enterprise-grade features:
@@ -267,7 +267,7 @@ Context: Building upon the foundation established in Phase 1, this phase focuses
   <img width="1000" src="https://i.imgur.com/ab0Ay9j.png" alt="Lab Step">
 </p>
 
-## 🌐 Step 3 | Network & Domain Integration
+## 🌐 2.3 | Network & Domain Integration
 * **Objective:** Connect the client to the network and authenticate it to the domain.
 
 * **Action Taken:**
@@ -285,7 +285,7 @@ Context: Building upon the foundation established in Phase 1, this phase focuses
 
 * **Validation:** Confirmed the machine appeared in the "Computers" container and moved it into the "Workstations" OU.
 
-## 📥 Step 4 | Infrastructure Validation
+## 📥 2.4 | Infrastructure Validation
 * **Objective:** Confirm successful domain integration and centralised authentication.
 * **Action Taken:** Created a temporary test user ("Jim Watkins") within the Accounts OU to verify that domain-level authentication is functioning correctly across the joined WS01 workstation.
 * **Result:** Successfully logged into the Windows 11 workstation using domain credentials, confirming end-to-end connectivity between the Client and DC01.
@@ -303,7 +303,7 @@ Context: Building upon the foundation established in Phase 1, this phase focuses
 
 **Context:** With the workstations successfully joined to the LAB.local domain, this phase focuses on applying Group Policy Objects (GPOs) to enforce security baselines, standardise the user experience, and harden endpoints against unauthorised changes.
 
-## Step 1 | Security Hardening: Endpoint Restriction
+## 3.1 | Security Hardening: Endpoint Restriction
 * **Objective:** Prevent unauthorised modifications to system settings to maintain a secure configuration baseline.
 * **Action Taken:** Deployed a GPO titled Restrict-Workstation-Settings linked to the Workstations OU. Configured policy settings to prohibit access to the Control Panel and Windows Settings app.
 * **Result:** Standard users (e.g., Jim Watkins) are prevented from altering system configurations, significantly reducing the attack surface of the endpoint.
@@ -311,7 +311,7 @@ Context: Building upon the foundation established in Phase 1, this phase focuses
   <img src="https://i.imgur.com/5mR6pvx.png" alt="Lab Step">
 </p>
 
-## Step 2 | User Experience: Standardisation
+## 3.2 | User Experience: Standardisation
 * **Objective:** Create a consistent, professional desktop environment for all corporate users.
 * **Action Taken:** Deployed a GPO titled Workstation-Environment-Policy to enforce a corporate-standard desktop wallpaper and configure specific taskbar settings.
 * **Result:** All domain-joined machines now present a uniform user interface, reflecting standard enterprise branding and layout requirements.
@@ -325,7 +325,7 @@ Context: Building upon the foundation established in Phase 1, this phase focuses
   <img src="https://i.imgur.com/4R3xdZX.png" alt="Lab Step">
 </p>
 
-## Step 3 | Identity Security: Password Policy
+## 3.3 | Identity Security: Password Policy
 * **Objective:** Enforce robust account security at the domain level.
 * **Action Taken:** Created a GPO titled Domain-Password-Policy linked to the domain root. Configured settings for password complexity, minimum length, and account lockout thresholds after failed attempts.
 * **Result:** Strengthened the identity foundation by ensuring all user accounts comply with enterprise-grade password security requirements.
@@ -333,7 +333,7 @@ Context: Building upon the foundation established in Phase 1, this phase focuses
   <img src="https://i.imgur.com/RIpUTgr.png" alt="Lab Step">
 </p>
 
-## Step 4 | Data Access & Permissions: Automated Scalability
+## 3.4 | Data Access & Permissions: Automated Scalability
 
 * **Objective:** Implement role-based access control (RBAC) and automated resource provisioning for departmental data.
 * **Action Taken:** 
@@ -369,7 +369,7 @@ Context: Building upon the foundation established in Phase 1, this phase focuses
 
 **Context:** Transitioning from a single-user proof of concept to a multi-departmental, role-based enterprise environment.
 
-## Step 1 | Multi-Departmental OU Hierarchy
+## 4.1 | Multi-Departmental OU Hierarchy
 * **Objective:** Establish a scalable directory structure to support enterprise growth.
 * **Action Taken:** Architected a granular OU hierarchy under the `LAB.local` root.
     * **`_Enterprise_Assets`**: Organised into departmental sub-OUs (`HR`, `Finance`, `IT`) to allow for OU-level GPO filtering.
@@ -391,7 +391,7 @@ Figure 1: Enterprise OU Hierarchy. Organised by Asset and User categories with d
 </p>
 *Figure 1: Enterprise OU Hierarchy showing departmental segmentation.*
 
-## Step 2 | Scalable RBAC with Group Policy Preferences (GPP)
+## 4.2 | Scalable RBAC with Group Policy Preferences (GPP)
 To maintain an enterprise-grade, clean environment, I utilised a centralised "Mapped Drives" GPO policy rather than creating departmental GPO sprawl.
 
 * **Methodology:** I implemented **Item-Level Targeting** within a single GPO.
@@ -406,7 +406,7 @@ To maintain an enterprise-grade, clean environment, I utilised a centralised "Ma
 </p>
 *Figure 2: GPP Item-Level Targeting interface demonstrating identity-driven resource provisioning.*
 
-## Step 3 | Asset Management & Lifecycle
+## 4.3 | Asset Management & Lifecycle
 * **Objective:** Implement standardised workflows for maintaining a production-grade fleet.
 
 #### 1. Standardised Naming & Attribution
