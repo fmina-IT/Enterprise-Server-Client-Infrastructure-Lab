@@ -14,6 +14,7 @@ This enterprise lab project simulates a production-grade, multi-tier network env
 *   **Identity & Access:** Role-Based Access Control (RBAC), OU Hierarchy Design, and Item-Level Targeting (GPP).
 *   **Fleet Management:** PowerShell automation, standardised workstation naming conventions, and lifecycle management.
 *   **Network Foundations:** TCP/IP configuration, virtual network architecture, and diagnostic troubleshooting (ping, nslookup, ipconfig).
+*   **Edge Routing & NAT:** Implemented RRAS (Routing and Remote Access) to architect a multi-tiered network, enabling secure Network Address Translation (NAT) for internet-isolated environments.
 *   **Security & Policy:** Group Policy (GPO) hardening, security baselines, and enterprise endpoint administration.
 
 ## 🧰 Lab Stack & Tools
@@ -30,15 +31,16 @@ This enterprise lab project simulates a production-grade, multi-tier network env
 |---|---|
 | Domain Name | `LAB.local` |
 | DC01 | Windows Server 2022 (Domain Controller, Static IP, DNS, DHCP) |
+| Network | **Adapter 1:** Internal Network (Isolated Lab); **Adapter 2:** NAT (Internet Access) |
+| Routing Service | RRAS NAT (Network Address Translation) |
 | Workstation Fleet | Windows 11 Pro (Managed via GPO, Departmentally segmented) |
-| Network | Isolated Internal Network (VirtualBox) |
 
 ## 🌐 Infrastructure Topology
 **Architectural Overview:** The environment utilies a dual-homed configuration on the Domain Controller (DC01) to logically isolate core infrastructure services from the host network. All internal traffic and domain communication are routed through a dedicated isolated virtual switch, ensuring secure, multi-tier network segmentation.
 
 **Note on Architecture:** To balance lab flexibility with service isolation, `DC01` is currently dual-homed. In a production-hardened environment, this would be transitioned to a single-homed Domain Controller protected 
 <p align="center">
-  <img src="https://i.imgur.com/vTiGmS2.png" alt="Lab Architecture Diagram" width="1000">
+  <img src="https://i.imgur.com/a9WTLIy.png" alt="Updated Lab Architecture Diagram" width="1000">
 </p>
 ---
 
